@@ -1,0 +1,23 @@
+local allowedHWIDs = {
+    "4A20C9C2-4578-47C5-9E28-5E932C5816D2",
+    "HWID3-HERE",
+    "HWID3-HERE"
+}
+
+local clientId = game:GetService("RbxAnalyticsService"):GetClientId()
+
+local function isHWIDAllowed(id)
+    for _, hwid in ipairs(allowedHWIDs) do
+        if id == hwid then
+            return true
+        end
+    end
+    return false
+end
+
+if isHWIDAllowed(clientId) then
+    print("Whitelisted, Script loading....")
+if not game:IsLoaded() then game.Loaded:Wait() end
+else
+    warn("Access denied. HWID Not whitelisted. Contact pineapplesupremea1 on discord for more infomation")
+end
